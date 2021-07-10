@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-
+	
     <title>Softy Pinko - Bootstrap 4.0 Theme</title>
 <!--
 SOFTY PINKO
@@ -16,10 +16,110 @@ https://templatemo.com/tm-535-softy-pinko
 -->
 
     <!-- Additional CSS Files -->
+
+<style>
+.orange-circle-button {
+	box-shadow: 2px 4px 0 2px rgba(0,0,0,0.1);
+	border: .5em solid #E84D0E;
+	font-size: 1em;
+	line-height: 1.1em;
+	color: #ffffff;
+	background-color: #e84d0e;
+	margin: auto;
+	border-radius: 50%;
+	height: 7em;
+	width: 7em;
+	position: relative;
+}
+.orange-circle-button:hover {
+	color:#ffffff;
+    background-color: #e84d0e;
+	text-decoration: none;
+	border-color: #ff7536;
+	
+}
+.orange-circle-button:visited {
+	color:#ffffff;
+    background-color: #e84d0e;
+	text-decoration: none;
+	
+}
+.orange-circle-link-greater-than {
+    font-size: 1em;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+.tabs {
+  margin: 0 auto;
+  padding: 0px 0px 200px;
+}
+#tab-button {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tab-button li {
+  display: table-cell;
+  width: 20%;
+}
+#tab-button li a {
+  display: block;
+  padding: .5em;
+  background: #eee;
+  border: 1px solid #ddd;
+  text-align: center;
+  color: #000;
+  text-decoration: none;
+}
+#tab-button li:not(:first-child) a {
+  border-left: none;
+}
+#tab-button li a:hover,
+#tab-button .is-active a {
+  border-bottom-color: transparent;
+  background: #fff;
+}
+.tab-contents {
+  padding: .5em 2em 1em;
+  border: 1px solid #ddd;
+}
+
+
+
+.tab-button-outer {
+  display: none;
+}
+.tab-contents {
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .tab-button-outer {
+    position: relative;
+    z-index: 2;
+    display: block;
+  }
+  .tab-select-outer {
+    display: none;
+  }
+  .tab-contents {
+    position: relative;
+    top: -1px;
+    margin-top: 0;
+  }
+}
+</style>
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="assets/js/jquery.counterup.min.js">
 
     <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
 
+    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
     <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
 
     </head>
@@ -86,85 +186,30 @@ https://templatemo.com/tm-535-softy-pinko
     <!-- ***** Features Big Item End ***** -->
 
     <!-- ***** Home Parallax Start ***** -->
-    <section class="mini" id="work-process">
-        <div class="mini-content">
-            <div class="container">
-                <div class="row">
-                    <div class="offset-lg-3 col-lg-6">
-                        <div class="info">
-                            <h1>Chapter Selection</h1>
-                            <p>select your chapter you eant to test yourself</p>
-                        </div>
-                    </div>
-                </div>
+	<div style="padding-top:170px">
 
-                <!-- ***** Mini Box Start ***** -->
-                <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Bootstrap CSS -->
+<!-- jQuery first, then Bootstrap JS. -->
+<!-- Nav tabs -->
+
+    <div class="pdf-viewer-area mg-b-15">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+										<iframe src="pdf.pdf" width="100%" height="700px">
+    </iframe>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+									</div>
+								</div>
+							</div>
 							
-                            <strong>Chapter 1</strong>
-                            <a href="ebook.html">E-book</a><br>
-                            <a href="question.html">MCQ</a><br>
-                            <a href="writtenlist.html">Written</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-							
-                            <strong>Chapter 2</strong>
-                            <a href="#">E-book</a><br>
-                            <a href="#">MCQ</a><br>
-                            <a href="#">Written</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-							
-                            <strong>Chapter 3</strong>
-                            <a href="#">E-book</a><br>
-                            <a href="#">MCQ</a><br>
-                            <a href="#">Written</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-							
-                            <strong>Chapter 4</strong>
-                            <a href="#">E-book</a><br>
-                            <a href="#">MCQ</a><br>
-                            <a href="#">Written</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-							
-                            <strong>Chapter 5</strong>
-                            <a href="#">E-book</a><br>
-                            <a href="#">MCQ</a><br>
-                            <a href="#">Written</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
-                        <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
-							
-                            <strong>Chapter 6</strong>
-                            <a href="#">E-book</a><br>
-                            <a href="#">MCQ</a><br>
-                            <a href="#">Written</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- ***** Mini Box End ***** -->
-            </div>
-        </div>
-    </section>
+						</div>
+</div>
     <!-- ***** Home Parallax End ***** -->
 
     <!-- ***** Testimonials Start ***** -->
@@ -203,9 +248,43 @@ https://templatemo.com/tm-535-softy-pinko
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/jquery.counterup.min.js"></script>
     <script src="assets/js/imgfix.min.js"></script> 
+    <script src="assets/js/pdf-active.js"></script> 
+    <script src="assets/js/jquery.media.js"></script> 
     
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
+	<script>
+	$(function() {
+  var $tabButtonItem = $('#tab-button li'),
+      $tabSelect = $('#tab-select'),
+      $tabContents = $('.tab-contents'),
+      activeClass = 'is-active';
+
+  $tabButtonItem.first().addClass(activeClass);
+  $tabContents.not(':first').hide();
+
+  $tabButtonItem.find('a').on('click', function(e) {
+    var target = $(this).attr('href');
+
+    $tabButtonItem.removeClass(activeClass);
+    $(this).parent().addClass(activeClass);
+    $tabSelect.val(target);
+    $tabContents.hide();
+    $(target).show();
+    e.preventDefault();
+  });
+
+  $tabSelect.on('change', function() {
+    var target = $(this).val(),
+        targetSelectNum = $(this).prop('selectedIndex');
+
+    $tabButtonItem.removeClass(activeClass);
+    $tabButtonItem.eq(targetSelectNum).addClass(activeClass);
+    $tabContents.hide();
+    $(target).show();
+  });
+});
+	</script>
 
   </body>
 </html>

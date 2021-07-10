@@ -8,7 +8,59 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
+<style>
+.box{
+  width: 300px;
+  padding: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
 
+  text-align: center;
+}
+.box h1{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.box input[type = "text"],.box input[type = "password"]{
+  border:0;
+  
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+.box input[type = "text"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #2ecc71;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #2ecc71;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+.box input[type = "submit"]:hover{
+  background: #2ecc71;
+}
+
+</style>
     <title>Model Test  </title>
 <!--
 SOFTY PINKO
@@ -51,11 +103,8 @@ https://templatemo.com/tm-535-softy-pinko
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="#welcome" class="active">Home</a></li>
-                            <li><a href="#features">About</a></li>
-                            <li><a href="#work-process">Work Process</a></li>
-                            <li><a href="#testimonials">Testimonials</a></li>
-                            <li><a href="#pricing-plans">Pricing Tables</a></li>
-                            <li><a href="#blog">Blog Entries</a></li>
+                            <li><a href="ebook.html">Previous year Question</a></li>
+                            
                             <li><a href="#contact-us">Contact Us</a></li>
                         </ul>
                         <a class='menu-trigger'>
@@ -76,10 +125,46 @@ https://templatemo.com/tm-535-softy-pinko
         <div class="header-text">
             <div class="container">
                 <div class="row">
-                    <div class="offset-xl-3 col-xl-6 offset-lg-2 col-lg-8 col-md-12 col-sm-12">
-                        <h1>We provide the best <strong>strategy</strong><br>to grow up your <strong>SSC preparation</strong></h1>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <h1 style="margin-top:150px">We provide the best <strong>strategy</strong><br>to grow up your <strong>SSC preparation</strong></h1>
                         
-                        <a href="subject.html" class="main-button-slider">Lets Start</a>
+                       
+						 <section class="mini" id="work-process" style="padding:11px">
+						<div class="mini-content">
+							<div class="container">
+								<div class="row">
+									<a href="subject.html" class="mini-box" style="margin-right:42px;padding:40px">
+										<i><img src="assets/images/jsc.png" alt=""></i>
+										<strong>JSC</strong>
+										<!-- <span>Something</span>-->
+									</a>
+									<a href="subject.html" class="mini-box" style="margin-right:42px;padding:40px">
+										<i><img src="assets/images/ssc.png" alt=""></i>
+										<strong>SSC</strong>
+										<!-- <span>Something</span>-->
+									</a>
+									<a href="subject.html" class="mini-box" style="margin-right:42px;padding:40px">
+										<i><img src="assets/images/hsc.png" alt=""></i>
+										<strong>HSC</strong>
+										<!-- <span>Something</span>-->
+									</a>
+									
+									</div>
+								</div>
+							</div>
+							</section>
+							
+					
+					</div>
+                    
+					<div class="col-lg-6 col-md-12 col-sm-12">
+                        <form class="box" action="index.html" method="post">
+						  <h1>Login</h1>
+						  <input type="text" name="" placeholder="Username">
+						  <input type="password" name="" placeholder="Password">
+						  <input type="submit" name="" value="Login">
+						</form>
+
                     </div>
                 </div>
             </div>
