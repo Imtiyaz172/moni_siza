@@ -9,55 +9,28 @@
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
 <style>
-.box{
-  width: 300px;
-  padding: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+.form-login {
+    background-color: #EDEDED;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border-color:#d2d2d2;
+    border-width: 5px;
+    box-shadow:0 1px 0 #cfcfcf;
+	margin-top:170px;
+}
 
-  text-align: center;
+
+.form-control {
+    border-radius: 10px;
 }
-.box h1{
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500;
+
+.wrapper {
+    text-align: center;
 }
-.box input[type = "text"],.box input[type = "password"]{
-  border:0;
-  
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #3498db;
-  padding: 14px 10px;
-  width: 200px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-}
-.box input[type = "text"]:focus,.box input[type = "password"]:focus{
-  width: 280px;
-  border-color: #2ecc71;
-}
-.box input[type = "submit"]{
-  border:0;
-  background: none;
-  display: block;
-  margin: 20px auto;
-  text-align: center;
-  border: 2px solid #2ecc71;
-  padding: 14px 40px;
-  outline: none;
-  color: white;
-  border-radius: 24px;
-  transition: 0.25s;
-  cursor: pointer;
-}
-.box input[type = "submit"]:hover{
-  background: #2ecc71;
+
 }
 
 </style>
@@ -158,12 +131,18 @@ https://templatemo.com/tm-535-softy-pinko
 					</div>
                     
 					<div class="col-lg-6 col-md-12 col-sm-12">
-                        <form class="box" action="index.html" method="post">
-						  <h1>Login</h1>
-						  <input type="text" name="" placeholder="Username">
-						  <input type="password" name="" placeholder="Password">
-						  <input type="submit" name="" value="Login">
-						</form>
+                        <div class="form-login">
+							<h2>Login</h2>
+							<input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
+							</br>
+							<input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
+							</br>
+							<div class="wrapper">
+							<span class="group-btn">     
+								<a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
+							</span>
+							</div>
+							</div>
 
                     </div>
                 </div>
