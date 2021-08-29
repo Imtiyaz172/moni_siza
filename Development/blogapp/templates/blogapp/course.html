@@ -1,0 +1,48 @@
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% load data_load %}
+
+{% block content %}	
+
+    <!-- Top Teachers -->
+
+	<div class="teachers">
+	
+		<div class="container">
+		<div class="dropdown">
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Class
+							<span class="caret"></span></button>
+							<ul class="dropdown-menu">
+							{% for sub in classlist|classeslist %}
+							  <center><li><a href="/course/{{sub.name}}/">{{sub.name}}</a></li>
+							  
+							  {% endfor %}
+							</ul>
+						  </div>
+			<div class="row">
+				<div class="col">
+					<h2 class="section_title text-center">Choose your subject</h2>
+				</div>
+			</div>
+			<div class="row teachers_row">
+
+				<!-- Instructor -->
+				{% for sub in subjects %}
+				<div class="col-lg-4 col-md-6">
+					<div class="teacher d-flex flex-row align-items-center justify-content-start">
+						<div class="teacher_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
+						<div class="teacher_content">
+							<div class="teacher_name"><a href="/list/{{sub.classes.name|str2url}}/{{sub.subject.name|str2url}}">{{sub.subject.name}}</a></div>
+							<!-- <div class="teacher_title">Teacher</div> -->
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				<!-- Instructor -->
+				
+
+			</div>
+		</div>
+	</div>
+    <!-- ***** Features Small End ***** -->
+{% endblock %}

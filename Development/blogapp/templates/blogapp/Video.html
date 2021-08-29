@@ -1,0 +1,56 @@
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% load data_load %}
+
+{% block content %}	
+
+	<div style="padding-top:170px">
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Bootstrap CSS -->
+<!-- jQuery first, then Bootstrap JS. -->
+<!-- Nav tabs -->
+
+<div class="container">
+				<div class="row">
+					
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_1|safe}}
+							</div>
+						</div>
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_2|safe}}
+							</div>
+						</div>
+						
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_3|safe}}
+							</div>
+						</div>
+						
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_4|safe}}
+							</div>
+						</div>
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_4|safe}}
+							</div>
+						</div>
+						<div class="col-sm-3 nopadding" style="margin: 40px;">
+							<div class="embed-responsive embed-responsive-16by9">
+							{{video.Chapter_video_5|safe}}
+							</div>
+						</div>
+					
+					</div>
+			
+		</div>
+</div>
+    <!-- ***** Home Parallax End ***** -->
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% load data_load %}
+
+{% block content %}	
+    <section class="mini" id="work-process">
+        <div class="mini-content">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-lg-3 col-lg-6">
+                        <div class="info">
+                            <h1>Chapter Selection</h1>
+                            <p>select your chapter you eant to test yourself</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ***** Mini Box Start ***** -->
+                <div class="row">
+                {% for chapter in subjects_chapter %}
+                    <div class="col-lg-2 col-md-3 col-sm-6 col-6">
+                        <div class="mini-box">
+                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>							
+                            <strong>{{chapter.chapter}}</strong>
+                            <a href="/Practices/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}/">Practices</a><br>
+                            <a href="/list/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}">MCQ</a><br>
+                            <a href="/Written/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}">Written</a><br>
+                            <a href="/Video/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}">Video</a><br>
+                        </div>
+                    </div>
+                    {% endfor %}
+                   
+                </div>
+                <!-- ***** Mini Box End ***** -->
+            </div>
+        </div>
+    </section>
+ {% endblock %}
