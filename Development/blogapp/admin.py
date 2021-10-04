@@ -54,6 +54,31 @@ class chapterModel(admin.ModelAdmin):
 admin.site.register(models.chapter, chapterModel)
 
 
+class yearModel(admin.ModelAdmin):
+    list_display    = ["year"]
+    search_fields   = ['year']
+    list_per_page   = 20
+    list_filter     = ["year"]
+
+admin.site.register(models.year, yearModel)
+
+class boardModel(admin.ModelAdmin):
+    list_display    = ["name"]
+    search_fields   = ['name']
+    list_per_page   = 20
+    list_filter     = ["name"]
+
+admin.site.register(models.board, boardModel)
+
+class prev_year_quesModel(admin.ModelAdmin):
+    list_display    = ["name"]
+    search_fields   = ['name']
+    list_per_page   = 20
+    list_filter     = ["name"]
+
+admin.site.register(models.prev_year_ques, prev_year_quesModel)
+
+
 
 class subjectchapterModel(admin.ModelAdmin):
     list_display    = ["name", "classsubject", "chapter"]
@@ -73,11 +98,20 @@ class questionModel(admin.ModelAdmin):
 admin.site.register(models.question, questionModel)
 
 
-class user_regModel(admin.ModelAdmin):
-    list_display    = ["name", "user_type", "classes","status"]
-    search_fields   = ['name','classes']
+class writtenModel(admin.ModelAdmin):
+    list_display    = ["__str__","title","status"]
+    search_fields   = ['title']
     list_per_page   = 50
-    list_filter     = ["user_type", "classes","status"]
+    list_filter     = ["status"]
+
+admin.site.register(models.written, writtenModel)
+
+
+class user_regModel(admin.ModelAdmin):
+    list_display    = ["f_name", "status"]
+    search_fields   = ['f_name']
+    list_per_page   = 50
+    list_filter     = ["status"]
 
 admin.site.register(models.user_reg, user_regModel)
 
@@ -88,6 +122,14 @@ class user_answerModel(admin.ModelAdmin):
     list_filter     = ["status"]
 
 admin.site.register(models.user_answer, user_answerModel)
+
+class user_written_answerModel(admin.ModelAdmin):
+    list_display    = ["user_reg"]
+    search_fields   = []
+    list_per_page   = 50
+    list_filter     = ["status"]
+
+admin.site.register(models.user_written_answer, user_written_answerModel)
 
 class user_hit_countModel(admin.ModelAdmin):
     list_display    = ["user_reg","question","hit_count","star"]

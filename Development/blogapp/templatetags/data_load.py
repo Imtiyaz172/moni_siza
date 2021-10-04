@@ -30,6 +30,12 @@ def users(request):
     return users
 
 
+@register.filter(name='year_reg')
+def year(request):
+    year  = models.prev_year_ques.objects.filter(status = True).order_by("-id")
+    return year
+
+
 
 @register.filter(name='str2url')
 def string_to_url_convert(data):

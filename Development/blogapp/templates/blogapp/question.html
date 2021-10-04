@@ -1,264 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% load data_load %}
 
-  <head>
+{% block content %}	
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900" rel="stylesheet">
-
-    <title>PreTest  </title>
-<!--
-SOFTY PINKO
-https://templatemo.com/tm-535-softy-pinko
--->
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
-    <link rel="stylesheet" href="assets/css/templatemo-softy-pinko.css">
-<style>
-
-
-.kudos-wrap {
-      
-    margin-bottom: 30px;
-    padding:25px 15px;
-    
-}
-
-
-.kudos-wrap ul {
-  list-style-type: none;
-}
-
-.kudos-wrap li {
-  display: inline-block;
-}
-
-.kudos-wrap input[type="checkbox"][id^="cb"] {
-  display: none;
-}
-.kudos-wrap input[type="radio"][id^="exampleRadios"] {
-  display: none;
-}
-
-.kudos-wrap label {
-  border: 1px solid #2196F3;
-  padding: 10px;
-  display: block;
-  position: relative;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.kudos-wrap label:before {
-  background-color: white;
-  color: white;
-  content: " ";
-  display: block;
-  border-radius: 50%; 
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  width: 25px;
-  height: 25px;
-  text-align: center;
-  line-height: 28px;
-  transition-duration: 0.4s;
-  transform: scale(0);
-}
-
-.kudos-wrap label img {
-  height: 100px;
-  width: 100px;
-  transition-duration: 0.2s;
-  transform-origin: 50% 50%;
-}
-
-.kudos-wrap :checked + label {
-  border-color: #673AB7;
-}
-
-.kudos-wrap :checked + label:before {
-    content: "✓";
-    font-size: 15px;
-    font-weight: bold;
-    background-color: #673AB7;
-    transform: scale(1);
-}
-.kudos-wrap qtoform{
-	margin-top: 80px;
-}
-ul.chec-radio {
-    margin: 15px;
-}
-ul.chec-radio li.pz {
-    display: inline;
-}
-.chec-radio label.radio-inline input[type="checkbox"] {
-    display: none;
-}
-.chec-radio label.radio-inline input[type="checkbox"]:checked+div {
-    color: rgb(255, 255, 255);
-    background-color: green;
-}
-.chec-radio .radio-inline .clab {
-    cursor: pointer;
-    background: #e7e7e7;
-    padding: 7px 20px;
-    text-align: center;
-    text-transform: uppercase;
-    color: rgb(0, 0, 0);
-    position: relative;
-    height: 34px;
-    float: left;
-    margin: 0;
-    margin-bottom: 5px;
-}
-.chec-radio label.radio-inline input[type="checkbox"]:checked+div:before {
-    
-    margin-right: 5px;
-    font-family: 'Glyphicons Halflings';
-}
-.chec-radio label.radio-inline input[type="radio"] {
-    display: none;
-}
-.chec-radio label.radio-inline input[type="radio"]:checked+div {
-    color: rgb(255, 255, 255);
-    background-color: #673AB7;
-}
-.chec-radio label.radio-inline input[type="radio"]:checked+div:before {
-    
-    margin-right: 5px;
-    font-family: 'Glyphicons Halflings';
-}
-.kudos-wrap2 ul {
-	list-style-type: none;
-  }
-  
-  .kudos-wrap2  li {
-	display: inline-block;
-  }
-  
-  .kudos-wrap2 input[type="radio"][id^="cb"] {
-	display: none;
-  }
-  
-  .kudos-wrap2 label {
-	border: 1px solid #fff;
-	padding: 10px;
-	border-radius: 50%;
-	display: block;
-	position: relative;
-	margin: 10px;
-	cursor: pointer;
-  }
-  
-  .kudos-wrap2 label:before {
-	background-color: rgba(16, 65, 99, 0.32 );
-	text-align:center;
-	color: white;
-	content: " ";
-	display: block;
-	border-radius: 50%;
-  /*   border: 1px solid grey; */
-	position: absolute;
-	top:10px;
-	left: 10px;
-	z-index:1;
-	width: 100px;
-	height: 100px;
-	text-align: center;
-	line-height: 100px;
-	transition-duration: 0.4s;
-	transform: scale(0);
-  }
-  
-  .kudos-wrap2 label img {
-	height: 100px;
-	width: 100px;
-	transition-duration: 0.1s;
-	transform-origin: 50% 50%;
-	border-radius: 50%;
-  }
-  
-  .kudos-wrap2:checked + label {
-	border-color: rgb(224, 29, 29);
-  }
-  
-  .kudos-wrap2:checked + label:before {
-	content: "✓";
-	transform: scale(1.1);
-  }
-  
-  .kudos-wrap2:checked + label img {
-	transform: scale(1.2);
-	box-shadow: 0 0 3px #333;
-	z-index: -1;
-  }
-</style>
-    </head>
-    
-    <body onload="start()">
-    
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-    
-    
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">
-                            <h2>PreTest</h2>
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                       <ul class="nav">
-                            <li><a href="index.html" class="active">Home</a></li>
-                            <li><a href="course.html" >Course</a></li>
-                            <li><a href="connectus.html" >Connect us</a></li>
-							
-                            <li><a href="signup.html">SignUp</a></li>
-							<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Previous Year Questions
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							  <li><a href="pre_sub_selection.html">2020</a></li>
-							  <li><a href="pre_sub_selection.html">2019</a></li>
-							  <li><a href="pre_sub_selection.html">2019</a></li>
-							  <li><a href="pre_sub_selection.html">2018</a></li>
-							  <li><a href="pre_sub_selection.html">2017</a></li>
-							</ul>
-						  </div>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-
-    <!-- ***** Blog End ***** -->
 
     <!-- ***** Contact Us Start ***** -->
  	<div style="padding:170px 0px 100px">
@@ -275,38 +20,38 @@ ul.chec-radio li.pz {
 					
 					
 
-					
-						<div class="tab_panel description active">
+					{% if questions.ques_type == "MCQ" %}	
+						<center><div class="tab_panel description active">
 						
-							<div class="panel_title">What is your name </div>
+							<div class="panel_title" style="font-size:25px">{{questions.title}} </div>
 							
 									
 							<div class="panel_text">
-								<form action="" method="POST">
+								<form action="" method="POST">{% csrf_token %}
 									<ul class="chec-radio">
 										
 											<li class="pz">
 												<label class="radio-inline">
 													<input type="radio" id="pro-chx-residential" name="ans_op_1" class="pro-chx" value="True">
-													<div class="clab">Rahim</div>
+													<div class="clab">{{questions.text_op_1}}</div>
 												</label>
 											</li>
 											<li class="pz">
 												<label class="radio-inline">
 													<input type="radio" id="pro-chx-commercial" name="ans_op_2" class="pro-chx" value="True" >
-													<div class="clab">Karim</div>
+													<div class="clab">{{questions.text_op_2}}</div>
 												</label>
 											</li>
 											<li class="pz">
 												<label class="radio-inline">
 													<input type="radio" id="pro-chx-open" name="ans_op_3" class="pro-chx" value="True">
-													<div class="clab">Fahim</div>
+													<div class="clab">{{questions.text_op_3}}</div>
 												</label>
 											</li>
 											<li class="pz">
 												<label class="radio-inline">
 													<input type="radio" id="pro-chx-close" name="ans_op_4" class="pro-chx" value="True">
-													<div class="clab">Dalim</div>
+													<div class="clab">{{questions.text_op_4}}</div>
 												</label>
 											</li>
 											<li class="laps"></li>
@@ -317,38 +62,39 @@ ul.chec-radio li.pz {
 							</div>
 						</div>
 						<br><br>
+						{% elif questions.ques_type == "Multiple_MCQ" %}
 						<div class="tab_panel description active">
 						
-							<div class="panel_title">What is database</div>
+							<div class="panel_title">{{questions.title}} </div>
 							<div class="panel_text">
 							
 									
 								<div class="qtoform">	
-								<form action="" method="POST">
+								<form action="" method="POST">{% csrf_token %}
 									<ul class="chec-radio">
 										<li class="pz">
 											<label class="radio-inline">
 												<input type="checkbox" id="cb1" name="ans_op_1"  value="True"/>
-												<div class="clab">Data</div>		
+												<div class="clab">{{questions.text_op_1}}</div>		
 											</label>
 										</li>
 										<li class="pz">
 											<label class="radio-inline">
 												<input type="checkbox" id="cb2" name="ans_op_2" class="pro-chx" value="True" />
-												<div class="clab">Info</div>	
+												<div class="clab">{{questions.text_op_2}}</div>	
 											</label>
 										</li>
 										<li class="pz">
 											<label class="radio-inline">
 												<input type="checkbox" id="cb3" name="ans_op_3" class="pro-chx" value="True"/>
-												<div class="clab">Code</div>	
+												<div class="clab">{{questions.text_op_3}}</div>	
 												
 											</label>
 										</li>
 										<li class="pz">
 											<label class="radio-inline">
 												<input type="checkbox" id="cb4" name="ans_op_4" class="pro-chx" value="True"/>
-												<div class="clab">Script</div>	
+												<div class="clab">{{questions.text_op_4}}</div>	
 												
 											</label>
 										</li>
@@ -361,12 +107,13 @@ ul.chec-radio li.pz {
 							</div>
 						</div>
 						<br><br>
+						{% elif questions.ques_type == "text" %}
 						<div class="tab_panel description active">
-							<div class="panel_title">Who is inventor of database</div>
+							<div class="panel_title">{{questions.title}}</div>
 							<div class="panel_text">
 								
 									<div class="qtoform">
-										<form action="" method="POST">
+										<form action="" method="POST">{% csrf_token %}
 										 <li class="laps"></li>
 											<input type="text" name="direct_input_op" id="">	<br><br>				
 											<button class="btn btn-primary" type="submit" onclick="pause()">Submit</button>
@@ -374,10 +121,18 @@ ul.chec-radio li.pz {
 									</div>									 
 							</div>				
 						</div>
-					
+					{% endif %}
 					
 				</div>
 				<div class="col-lg-3">
+				{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<center><li{% if message.tags %} class="{{ message.tags }}"{% endif %}><h4 style="color:green">{{ message }}</h4></li>
+										{% endfor %}
+											
+									</ul>
+									{% endif %}
 				<div class="sidebar">
 				<div class="sidebar_section features">
 				<div class="sidebar_title">Taking Time</div>
@@ -414,242 +169,8 @@ ul.chec-radio li.pz {
 		</div>
 		</div>
 	</div>
-<script type="text/javascript">
-		
-		var ms = 0, s = 0, m = 0;
-		var timer;
 
-		var stopwatchEl = document.querySelector('.stopwatch');
-		var lapsContainer = document.querySelector('.laps');
-
-		function start() {
-			if(!timer) {
-				timer = setInterval(run, 10);
-			}
-		}
-
-		function run() {
-			stopwatchEl.textContent = getTimer();
-			ms++;
-			if(ms == 100) {
-				ms = 0;
-				s++;
-			}
-			if(s == 60) {
-				s = 0;
-				m++;
-			}
-		}
-
-		function pause() {
-			if(timer) {
-				var li = document.createElement('input');
-				li.name = "taketime";
-				li.value = getTimer();
-				li.innerText = getTimer();
-				li.type = "hidden";
-				lapsContainer.appendChild(li);
-			}
-			stopTimer();
-		}
-
-		function stop() {
-			stopTimer();
-			ms = 0;
-			s = 0;
-			m = 0;
-			stopwatchEl.textContent = getTimer();
-		}
-
-		function stopTimer() {
-			clearInterval(timer);
-			timer = false;
-		}
-
-		function getTimer() {
-			return (m < 10 ? "0" + m : m) + "." + (s < 10 ? "0" + s : s) ;
-		}
-
-		function restart() {
-			stop();
-			start();
-		}
-
-		function lap() {
-			if(timer) {
-				var li = document.createElement('li');
-				li.innerText = getTimer();
-				lapsContainer.appendChild(li);
-			}
-		}
-
-		function resetLaps() {
-			lapsContainer.innerHTML = '';
-		}
-
-	</script>
 
 	 </div>
     <!-- ***** Contact Us End ***** -->
-    
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <ul class="social">
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="copyright">Copyright  </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-
-    <!-- Plugins -->
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    
-    <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
-	    <script >
-		function readURL(input) {
-  if (input.files && input.files[0]) {
-
-    var reader = new FileReader();
-
-    reader.onload = function(e) {
-      $('.image-upload-wrap').hide();
-
-      $('.file-upload-image').attr('src', e.target.result);
-      $('.file-upload-content').show();
-
-      $('.image-title').html(input.files[0].name);
-    };
-
-    reader.readAsDataURL(input.files[0]);
-
-  } else {
-    removeUpload();
-  }
-}
-		function removeUpload() {
-  $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-  $('.file-upload-content').hide();
-  $('.image-upload-wrap').show();
-}
-$('.image-upload-wrap').bind('dragover', function () {
-        $('.image-upload-wrap').addClass('image-dropping');
-    });
-    $('.image-upload-wrap').bind('dragleave', function () {
-        $('.image-upload-wrap').removeClass('image-dropping');
-});
-		</script>
-		
-<script type="text/javascript">
-            $(document).ready(function() {
-            $("input[type=radio]").prop("checked", false);
-            $("input[type=radio]:first").prop("checked", false);
-
-            $("input[type=radio]").click(function(event) {
-                $("input[type=radio]").prop("checked", false);
-                $(this).prop("checked", true);
-
-                //event.preventDefault();
-            });
-            });
-	</script>
-	<script type="text/javascript">
-		
-		var ms = 0, s = 0, m = 0;
-		var timer;
-
-		var stopwatchEl = document.querySelector('.stopwatch');
-		var lapsContainer = document.querySelector('.laps');
-
-		function start() {
-			if(!timer) {
-				timer = setInterval(run, 10);
-			}
-		}
-
-		function run() {
-			stopwatchEl.textContent = getTimer();
-			ms++;
-			if(ms == 100) {
-				ms = 0;
-				s++;
-			}
-			if(s == 60) {
-				s = 0;
-				m++;
-			}
-		}
-
-		function pause() {
-			if(timer) {
-				var li = document.createElement('input');
-				li.name = "taketime";
-				li.value = getTimer();
-				li.innerText = getTimer();
-				li.type = "hidden";
-				lapsContainer.appendChild(li);
-			}
-			stopTimer();
-		}
-
-		function stop() {
-			stopTimer();
-			ms = 0;
-			s = 0;
-			m = 0;
-			stopwatchEl.textContent = getTimer();
-		}
-
-		function stopTimer() {
-			clearInterval(timer);
-			timer = false;
-		}
-
-		function getTimer() {
-			return (m < 10 ? "0" + m : m) + "." + (s < 10 ? "0" + s : s) ;
-		}
-
-		function restart() {
-			stop();
-			start();
-		}
-
-		function lap() {
-			if(timer) {
-				var li = document.createElement('li');
-				li.innerText = getTimer();
-				lapsContainer.appendChild(li);
-			}
-		}
-
-		function resetLaps() {
-			lapsContainer.innerHTML = '';
-		}
-
-	</script>
-
-  </body>
-</html>
+{% endblock %}

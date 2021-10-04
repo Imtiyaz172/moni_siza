@@ -40,18 +40,20 @@
 					<div class="col-lg-6 col-md-12 col-sm-12">
                         <div class="form-login">
 							<h2>Login</h2>
-							<input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-							</br>
-							<input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-							</br>
-							<div class="wrapper">
-							<span class="group-btn">     
-								<a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-							</span>
-							<span class="group-btn">     
-								<a href="forgot_pass.html" class="btn btn-danger btn-md">Forgot Password <i class="fa fa-sign-in"></i></a>
-							</span>
-							</div>
+                            <form action="" method="POST">{% csrf_token %}
+                                <input type="text" id="userName" class="form-control input-sm chat-input" name="email" placeholder="Email" />
+                                </br>
+                                <input type="password" id="userPassword" class="form-control input-sm chat-input" name="password" placeholder="password" />
+                                </br>
+                                <div class="wrapper">
+                                    <span class="group-btn">     
+                                        <button type="submit" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></button>
+                                    </span>
+                                    <span class="group-btn">     
+                                        <a href="forgot_pass.html" class="btn btn-danger btn-md">Forgot Password <i class="fa fa-sign-in"></i></a>
+                                    </span>
+                                </div>
+                            </form>
 							</div>
 
                     </div>

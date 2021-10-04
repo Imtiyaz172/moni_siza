@@ -123,8 +123,8 @@ class written(models.Model):
     subjectchapter  = models.ForeignKey(subjectchapter, on_delete=models.CASCADE)
     title           = models.CharField(max_length=200,blank= True)
     body            = RichTextField(blank=True)
-    image           = models.FileField(upload_to="question/",blank= True)
-    ans             = models.FileField(upload_to="ebook/",blank= True)  
+    pdf             = models.FileField(upload_to="pdf/",blank= True)
+    
     status          = models.BooleanField(default = True)
 
     def __str__(self):
@@ -177,27 +177,17 @@ class question(models.Model):
 
 
 class user_reg(models.Model):
-    name               = models.CharField(max_length=100)
+    f_name               = models.CharField(max_length=100)
+    l_name               = models.CharField(max_length=100, blank=True)
     email              = models.EmailField(max_length=80, blank=True)
     mobile             = models.CharField(max_length=18, blank=True)
-    user_image         = models.ImageField(upload_to = "user_image/", blank = True)
     password           = models.CharField(max_length=100)
-    address            = models.TextField(blank=True)
-    school             = models.TextField(blank=True)
-    classes            = models.ForeignKey(classes, on_delete=models.CASCADE,blank = True, null =True)
-    roll               = models.TextField(blank=True)
-    point              = models.IntegerField(default=0)
+    date_of_birth            = models.CharField(max_length=80,blank=True)
     reg_date           = models.DateField(auto_now_add=True)
-    user_type = (
-        ('Student', 'Student'),
-        ('Teacher', 'Teacher'),
-        ('Guardian', 'Guardian'),
-        ('Job finder', 'Job finder'),
-    )
-    user_type         = models.CharField(max_length=20, choices=user_type,blank=True)
-    status            = models.BooleanField(default=False)
+
+    status            = models.BooleanField(default=True)
     def __str__(self):
-        return self.name     
+        return self.f_name     
     class Meta:
         verbose_name = 'User information'
         verbose_name_plural = 'Users informations' 
@@ -221,6 +211,19 @@ class user_answer(models.Model):
     class Meta:
         verbose_name = 'user_answer'
         verbose_name_plural = 'user_answers' 
+
+class user_written_answer(models.Model):
+    user_reg      = models.ForeignKey(user_reg, on_delete=models.CASCADE)
+    question      = models.ForeignKey(written, on_delete=models.CASCADE)
+    ans             = models.FileField(upload_to="ans/",blank= True)  
+    time          = models.DateTimeField(auto_now_add = True)
+    status        = models.BooleanField(default = True)
+
+    def __str__(self):
+        return str(self.user_reg)     
+    class Meta:
+        verbose_name = 'User written answer'
+        verbose_name_plural = 'User written answers' 
 
 
 class user_hit_count(models.Model):
