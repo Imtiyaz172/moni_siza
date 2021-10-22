@@ -362,7 +362,7 @@ def login(request):
         if user:
             request.session['email'] = user[0].email
             request.session['id'] = user[0].id
-            return redirect("/dashboard/")
+            return redirect("/")
     
     return render(request, "blogapp/admin/login.html")
 
@@ -440,7 +440,7 @@ def prv_year_ques(request, year_name,board,subject):
 
 def dashboard (request):
     if not request.session['id']:
-        return redirect('/login/')
+        return redirect('/')
     user_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
     mcq_count      = models.user_answer.objects.filter(user_reg_id = request.session['id']).count()
     written_count      = models.user_written_answer.objects.filter(user_reg_id = request.session['id']).count()

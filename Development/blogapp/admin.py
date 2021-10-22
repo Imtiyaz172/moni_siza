@@ -1,6 +1,6 @@
 from django.contrib import admin
 from . import models
-admin.site.site_header='Creative learning'
+admin.site.site_header='Online Educational Platform'
 
 
 # Register your models here.
@@ -124,7 +124,7 @@ class user_answerModel(admin.ModelAdmin):
 admin.site.register(models.user_answer, user_answerModel)
 
 class user_written_answerModel(admin.ModelAdmin):
-    list_display    = ["user_reg"]
+    list_display    = ["user_reg","status"]
     search_fields   = []
     list_per_page   = 50
     list_filter     = ["status"]

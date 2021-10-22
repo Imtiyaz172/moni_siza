@@ -38,6 +38,9 @@
 					</div>
                     
 					<div class="col-lg-6 col-md-12 col-sm-12">
+                    {% if not request.session.id %}
+                    
+                    
                         <div class="form-login">
 							<h2>Login</h2>
                             <form action="" method="POST">{% csrf_token %}
@@ -55,7 +58,7 @@
                                 </div>
                             </form>
 							</div>
-
+                        {% endif %}
                     </div>
                 </div>
             </div>
