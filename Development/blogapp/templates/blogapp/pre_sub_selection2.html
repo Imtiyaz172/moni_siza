@@ -10,13 +10,14 @@
 	
 		<div class="container">
 		<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Class
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Board
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-							{% for sub in classlist|classeslist %}
-							  <center><li><a href="/course/{{sub.name}}/">{{sub.name}}</a></li>
+							{% for board in question2 %}
+								<center><li><a href="/prv-ques/{{board.year|str2url}}/{{board.board|str2url}}">{{board.board}}</a></li>
+							{% endfor %}
 							  
-							  {% endfor %}
+							  
 							</ul>
 						  </div>
 			<div class="row">
@@ -27,22 +28,24 @@
 			<div class="row teachers_row">
 
 				<!-- Instructor -->
-				{% for sub in subjects %}
-				<div class="col-lg-4 col-md-6">
+				{% for subject in question %}
+					<div class="col-lg-4 col-md-6">
 					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img style="height:69px" src="/static/blogapp/media/{{sub.subject.image}}" alt=""></div></div>
+						<div class="teacher_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
 						<div class="teacher_content">
-							<div class="teacher_name"><a href="/list/{{sub.classes.name|str2url}}/{{sub.subject.name|str2url}}">{{sub.subject.name}}</a></div>
+							<div class="teacher_name"><a href="/prv-ques/{{subject.year_and_board.year|str2url}}/{{subject.year_and_board.board|str2url}}/{{subject.subject|str2url}}">{{subject.subject}}</a></div>
 							<!-- <div class="teacher_title">Teacher</div> -->
 						</div>
 					</div>
 				</div>
 				{% endfor %}
-				<!-- Instructor -->
 				
+
 
 			</div>
 		</div>
 	</div>
     <!-- ***** Features Small End ***** -->
+
+    <!-- ***** Home Parallax End ***** -->
 {% endblock %}

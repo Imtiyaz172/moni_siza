@@ -4,7 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name="index"),
-    path('prv-ques/<str:year_name>/<str:board_name>',views.prv_ques),
+    path('prv-ques/<str:year_name>/',views.prv_ques),
+    path('prv-ques/<str:year_name>/<str:board>/',views.prv_ques2),
+    path('prv-ques/<str:year_name>/<str:board>/<str:subject>/',views.prv_year_ques),
     path('course/<str:class_name>/',views.course),
     path('list/<str:class_name>/',views.classsubject),
     path('list/<str:class_name>/<str:sub_name>/',views.subjectquestion),
@@ -24,6 +26,7 @@ urlpatterns = [
     #........ Admin Urls..........
     path('dashboard/', views.dashboard),
     path('user-history/', views.history),
+    path('user-written-history/', views.written_history),
     path('sub-result/<str:class_name>/',views.subjectlist),
     path('sub-result/<str:class_name>/<str:sub_name>/',views.subjectperform),
     path('class-list-improvement/', views.classlistimprove),

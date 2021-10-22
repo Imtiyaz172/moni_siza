@@ -28,8 +28,15 @@ import random
 
 
 # Create your views here.
-def index(request):  
-        question          = models.prev_year_ques.objects.filter(status=True).order_by("year")         
+def index(request): 
+        models.visitor.objects.create() 
+        question_counter          = models.question.objects.filter(status=True).count()       
+        written_counter          = models.written.objects.filter(status=True).count()       
+        view_counter          = models.visitor.objects.filter(status=True)      
+        speech          = models.index_speech.objects.filter(status=True)      
+        registerd_counter          = models.user_reg.objects.filter(status=True).count()       
+        happy          = models.contact.objects.filter(view_in_home=True).order_by("-id")         
+             
         classsubjects       = models.classsubject.objects.filter(status=True).order_by("classes","subject")
         if request.method=="POST":
             email     = request.POST['email']
@@ -41,10 +48,16 @@ def index(request):
             if user:
                 request.session['email'] = user[0].email
                 request.session['id'] = user[0].id
-                return redirect("/")
+                return redirect("/dashboard/")
         context={
             'classsubjects' : classsubjects,
             'question' : question,
+            'speech' : speech,
+            'question_counter' : question_counter,
+            'written_counter' : written_counter,
+            'view_counter' : view_counter,
+            'registerd_counter' : registerd_counter,
+            'happy' : happy,
           
         }
         return render(request, "blogapp/index.html",context)
@@ -160,37 +173,24 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                     user_reg_id = int(request.session['id']), question_id = questions.id,text_choose = direct_input_op, taketime=taketime,
                 )
                 
-                # cheak_hit = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id)
-                # if cheak_hit:
-                #     models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(hit_count = F('hit_count')+1)
-                # else:
-                #     hit_count = models.user_hit_count.objects.create(
-                #     user_reg_id = int(request.session['id']), question_id = questions.id ,hit_count = 1
-                #     )
-                # cheak_star_5  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 1, star = 0)
-                # cheak_star_4  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 2, star = 0)
-                # cheak_star_3  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 3, star = 0)
-                # cheak_star_2  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 4, star = 0)
-                # cheak_star_1  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, star = 0)
+                
                 if cheak_ans:
-                #     if cheak_star_5:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+5)
-                #     elif cheak_star_4:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+4)
-                #     elif cheak_star_3:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+3)
-                #     elif cheak_star_2 :
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+2)
-                #     elif cheak_star_1 :
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+1)
+                
                     models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
                     messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে")
+                    valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
+
+                    valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
+                    return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
                 elif not cheak_ans:
                     messages.warning(request, "আপনার উত্তরটি ভুল হয়েছে")
                 
             else:
                 if cheak_ans:
-                    messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে")
+                    valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
+                    valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
+                    messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে.")
+                    return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
                 elif not cheak_ans:
                     messages.warning(request, "আপনার উত্তরটি ভুল হয়েছে")
             # if request.session.get('id'):
@@ -247,7 +247,10 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 # get_star  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id )       
             else:   
                 if cheak_ans:
+                    valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
+                    valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
                     messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে.")
+                    return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
                 elif not cheak_ans:
                     messages.warning(request, "আপনার উত্তরটি ভুল হয়েছে")
             
@@ -380,15 +383,41 @@ def course(request, class_name):
 
 
 
-def prv_ques(request, year_name,board_name):
+def prv_ques(request, year_name):
     year_name        = year_name.replace('-', ' ')
-    board_name        = board_name.replace('-', ' ')
-    question          = models.prev_year_ques.objects.filter(year_id__year=year_name,board_id__name=board_name,status=True).order_by("id")    
+    question          = models.board_on_year.objects.filter(year_id__year=year_name,status=True).order_by("id")    
     context={
         'question':question,
     }
     return render(request, "blogapp/pre_sub_selection.html",context)
 
+
+
+def prv_ques2(request, year_name,board):
+    year_name        = year_name.replace('-', ' ')
+    board            = board.replace('-', ' ')
+    question2          = models.board_on_year.objects.filter(status=True).order_by("id")    
+    question          = models.prev_year_ques.objects.filter(year_and_board_id__year_id__year=year_name,year_and_board_id__board_id__name=board,status=True).order_by("id")    
+    context={
+        'question2':question2,
+        'question':question,
+    }
+    return render(request, "blogapp/pre_sub_selection2.html",context)
+
+
+
+
+def prv_year_ques(request, year_name,board,subject):
+    year_name        = year_name.replace('-', ' ')
+    board            = board.replace('-', ' ')
+    subject            = subject.replace('-', ' ')  
+    prv_question          = models.prev_year_ques.objects.filter(year_and_board_id__year_id__year=year_name,year_and_board_id__board_id__name=board,subject_id__name=subject,status=True).first()
+    
+    context={
+        
+        'prv_question':prv_question,
+    }
+    return render(request, "blogapp/ebook2.html",context)
 
 
 
@@ -413,10 +442,14 @@ def dashboard (request):
     if not request.session['id']:
         return redirect('/login/')
     user_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
+    mcq_count      = models.user_answer.objects.filter(user_reg_id = request.session['id']).count()
+    written_count      = models.user_written_answer.objects.filter(user_reg_id = request.session['id']).count()
     context={
         'user_profile'    : user_profile,
+        'mcq_count'    : mcq_count,
+        'written_count'    : written_count,
 }
-    return render(request, "blogapp/admin/index.html",context)
+    return render(request, "blogapp/user_panel/index.html",context)
 
 def history (request):
     if not request.session['id']:
@@ -428,7 +461,19 @@ def history (request):
     context={
         'user_history'    : user_history,
 }
-    return render(request, "blogapp/admin/history1.html",context)
+    return render(request, "blogapp/user_panel/user_history.html",context)
+
+def written_history (request):
+    if not request.session['id']:
+        return redirect('/login/')
+    user_history      = models.user_written_answer.objects.filter( user_reg_id = request.session['id']).order_by("-id")
+    
+    
+        
+    context={
+        'user_history'    : user_history,
+}
+    return render(request, "blogapp/user_panel/history.html",context)
 
 
 def subjectresult(request):
@@ -631,7 +676,7 @@ def contact(request):
         models.contact.objects.create(email = email , name = name, massage = massage)
         messages.success(request, "Thankyou for send massage we will give you feedack in your mail")   
 
-    return render(request,'blogapp/contact.html')
+    return render(request,'blogapp/connectus.html')
 
 def about(request):  
 

@@ -13,123 +13,20 @@
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Board
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-							  <center><li><a href="prev_sub_sel.html">Dhaka</a></li>
-							  <center><li><a href="prev_sub_sel.html">Rajshahi</a></li>
-							  <center><li><a href="prev_sub_sel.html">Rangpur</a></li>
-							  <center><li><a href="prev_sub_sel.html">Dinajpur</a></li>
-							  <center><li><a href="prev_sub_sel.html">Joshor</a></li>
-							  <center><li><a href="prev_sub_sel.html">Khulna</a></li>
-							  <center><li><a href="prev_sub_sel.html">Chottrogram</a></li>
+							
+							{% for board in question %}
+								<center><li><a href="/prv-ques/{{board.year|str2url}}/{{board.board|str2url}}">{{board.board}}</a></li>
+							{% endfor %}
+							  
 							  
 							</ul>
 						  </div>
 			<div class="row">
 				<div class="col">
-					<h2 class="section_title text-center">Choose your subject</h2>
+					<h2 class="section_title text-center">Choose Board First</h2>
 				</div>
 			</div>
-			<div class="row teachers_row">
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="ebook.html">Bangla</a></div>
-							<!-- <div class="teacher_title">Teacher</div> -->
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_5.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">English</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_6.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">Math</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_7.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">Physics</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_8.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">Islam</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_9.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">ICT</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="assets/images/english.png" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">English</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_11.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">English</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-				<!-- Instructor -->
-				<div class="col-lg-4 col-md-6">
-					<div class="teacher d-flex flex-row align-items-center justify-content-start">
-						<div class="teacher_image"><div><img src="images/instructor_12.jpg" alt=""></div></div>
-						<div class="teacher_content">
-							<div class="teacher_name"><a href="instructors.html">English</a></div>
-							
-						</div>
-					</div>
-				</div>
-
-			</div>
+			
 		</div>
 	</div>
     <!-- ***** Features Small End ***** -->

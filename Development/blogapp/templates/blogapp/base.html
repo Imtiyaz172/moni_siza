@@ -380,7 +380,7 @@ ul.chec-radio li.pz {
 
 </style>
 
-    <title>PreTest  </title>
+    <title>PrepZone  </title>
 <!--
 SOFTY PINKO
 https://templatemo.com/tm-535-softy-pinko
@@ -417,7 +417,7 @@ https://templatemo.com/tm-535-softy-pinko
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/" class="logo">
-                            <h2>PreTest</h2>
+                            <h2>PrepZone</h2>
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
@@ -427,16 +427,15 @@ https://templatemo.com/tm-535-softy-pinko
                                 <li><a href="/course/{{jsc.name}}/" >Course</a></li>
                             {% endfor %}
                             {% comment %} <li><a href="/course/{{classcourse}}/" >Course</a></li> {% endcomment %}
-                            <li><a href="connectus.html" >Connect us</a></li>
+                            <li><a href="/contact/" >Connect us</a></li>
 							
                             <li><a href="/user-reg/">SignUp</a></li>
 							<div class="dropdown">
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Previous Year Questions
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-              {% regroup question by year as year_list %}
-              {% for year in year_list %}
-                <li><a href="prv-ques/{{year.grouper|str2url}}/{{year.0.|str2url}}/">{{year.grouper}}</a></li>
+              {% for year in year|year_reg %}
+                <li><a href="/prv-ques/{{year.year}}/">{{year.year}}</a></li>
               {% endfor %}
 							  
 							 

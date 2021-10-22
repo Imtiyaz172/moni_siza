@@ -2,19 +2,23 @@
 <html lang="en">
 
 
-<!-- index.html  21 Nov 2019 03:44:50 GMT -->
+<!-- datatables.html  21 Nov 2019 03:55:21 GMT -->
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>PreTest</title>
+  <title>Otika - Admin Dashboard Template</title>
+  {% load staticfiles %}
+  {% load data_load %}
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="assets/css/app.min.css">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/app.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/bundles/datatables/datatables.min.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css' %}">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/components.css' %}">
   <!-- Custom style CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/custom.css' %}">
+
 </head>
 
 <body>
@@ -143,7 +147,7 @@
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
 												fa-bell"></i>
-                  </span> <span class="dropdown-item-desc"> Welcome to PreTest
+                  </span> <span class="dropdown-item-desc"> Welcome to PrepZone
                     template! <span class="time">Yesterday</span>
                   </span>
                 </a>
@@ -176,8 +180,8 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
-                class="logo-name">PreTest</span>
+            <a href="/">  <span
+                class="logo-name">PrepZone</span>
             </a>
           </div>
           <ul class="sidebar-menu">
@@ -186,11 +190,11 @@
               <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+              <a href="" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>History</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="history.html">MCQ</a></li>
-                <li><a class="nav-link" href="">Written</a></li>
+                <li><a class="nav-link" href="/user-history/">MCQ</a></li>
+                <li><a class="nav-link" href="/user-written-history/">Written</a></li>
               </ul>
             </li>
             
@@ -203,98 +207,75 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-          <div class="row ">
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">MCQ Answered</h5>
-                          <h2 class="mb-3 font-18">258</h2>
-                          
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/1.png" alt="">
-                        </div>
-                      </div>
-                    </div>
+          <div class="section-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h4>Basic DataTables</h4>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15"> Written Answered</h5>
-                          <h2 class="mb-3 font-18">87</h2>
-                          
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/2.png" alt="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Grade</h5>
-                          <h2 class="mb-3 font-18">A+</h2>
-                          
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/3.png" alt="">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <div class="card">
-                <div class="card-statistic-4">
-                  <div class="align-items-center justify-content-between">
-                    <div class="row ">
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
-                        <div class="card-content">
-                          <h5 class="font-15">Stutas</h5>
-                          <h2 class="mb-3 font-18">Good</h2>
-                          
-                        </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
-                        <div class="banner-img">
-                          <img src="assets/img/banner/4.png" alt="">
-                        </div>
-                      </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped" id="table-1">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Question</th>
+                            <th>Class</th>
+                            <th>Subject</th>
+                            <th>Chapter</th>
+                            <th>Answared</th>
+                            
+                            <th>Time takes</th>
+							<th>Wrong/Right</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           {% for table in user_history %}
+                                    <tr>
+                                        <td>{{ forloop.revcounter}}</td>
+                                        <td>{{table.question}}</td>
+                                        <td>{{table.question.subjectchapter.classsubject.classes}}</td>
+                                        <td>{{table.question.subjectchapter.classsubject.subject}}</td>
+                                        <td>{{table.question.subjectchapter.chapter.name}}</td>
+                                    {% if table.text_choose %}
+                                        <td>{{table.text_choose}}</td>
+                                    {% else %}
+                                        <td>
+                                        {% if table.ans_choose_op_1 %}
+                                            {{table.question.text_op_1}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_2 %}
+                                                {{table.question.text_op_2}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_3 %}
+                                                {{table.question.text_op_3}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_4 %}
+                                            {{table.question.text_op_4}}
+                                        {% endif %}
+                                        </td>
+                                    {% endif %}
+                                        <td>{{table.taketime}}</td>
+                                    {% if table.is_correct_ans is True %}
+                                        <td class="datatable-ct" ><i class="fa fa-check"style="color:green"></i>
+                                        </td>
+                                    {% else %}
+                                        <td class="datatable-ct"><i class="fa fa-times"style="color:red"></i>
+                                        </td>
+                                    {% endif %}
+                                         
+                                    </tr>
+                                    {% endfor %}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
-          
+        </section>
         <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
           </a>
@@ -389,7 +370,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          <a href="templateshub.net">PreTest</a></a>
+          <a href="templateshub.net">Templateshub</a></a>
         </div>
         <div class="footer-right">
         </div>
@@ -397,17 +378,19 @@
     </div>
   </div>
   <!-- General JS Scripts -->
-  <script src="assets/js/app.min.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/js/app.min.js' %}"></script>
   <!-- JS Libraies -->
-  <script src="assets/bundles/apexcharts/apexcharts.min.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/bundles/datatables/datatables.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panel/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panel/assets/bundles/jquery-ui/jquery-ui.min.js' %}"></script>
   <!-- Page Specific JS File -->
-  <script src="assets/js/page/index.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/js/page/datatables.js' %}"></script>
   <!-- Template JS File -->
-  <script src="assets/js/scripts.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/js/scripts.js' %}"></script>
   <!-- Custom JS File -->
-  <script src="assets/js/custom.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/js/custom.js' %}"></script>
 </body>
 
 
-<!-- index.html  21 Nov 2019 03:47:04 GMT -->
+<!-- datatables.html  21 Nov 2019 03:55:25 GMT -->
 </html>

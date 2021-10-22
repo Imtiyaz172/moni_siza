@@ -2,21 +2,21 @@
 <html lang="en">
 
 
-<!-- export-table.html  21 Nov 2019 03:55:25 GMT -->
+<!-- index.html  21 Nov 2019 03:44:50 GMT -->
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Otika - Admin Dashboard Template</title>
+  <title>PrepZone</title>
+  {% load static %}
+  {% load data_load %}
   <!-- General CSS Files -->
-  <link rel="stylesheet" href="assets/css/app.min.css">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/app.min.css' %}">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="assets/bundles/datatables/datatables.min.css">
-  <link rel="stylesheet" href="assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/components.css' %}">
   <!-- Custom style CSS -->
-  <link rel="stylesheet" href="assets/css/custom.css">
-  <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' />
+  <link rel="stylesheet" href="{% static 'blogapp/user_panel/assets/css/custom.css' %}">
+
 </head>
 
 <body>
@@ -145,7 +145,7 @@
                   </span>
                 </a> <a href="#" class="dropdown-item"> <span class="dropdown-item-icon bg-info text-white"> <i class="fas
 												fa-bell"></i>
-                  </span> <span class="dropdown-item-desc"> Welcome to Otika
+                  </span> <span class="dropdown-item-desc"> Welcome to PrepZone
                     template! <span class="time">Yesterday</span>
                   </span>
                 </a>
@@ -178,21 +178,21 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html"> <img alt="image" src="assets/img/logo.png" class="header-logo" /> <span
-                class="logo-name">PreTest</span>
+            <a href="/">  <span
+                class="logo-name">PrepZone</span>
             </a>
           </div>
           <ul class="sidebar-menu">
             <li class="menu-header">Menu</li>
-            <li >
+            <li class="dropdown active">
               <a href="index.html" class="nav-link"><i data-feather="monitor"></i><span>Dashboard</span></a>
             </li>
             <li class="dropdown">
-              <a href="#" class="menu-toggle nav-link has-dropdown"><i
+              <a href="" class="menu-toggle nav-link has-dropdown"><i
                   data-feather="briefcase"></i><span>History</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="history.html">MCQ</a></li>
-                <li><a class="nav-link" href="">Written</a></li>
+                <li><a class="nav-link" href="/user-history/">MCQ</a></li>
+                <li><a class="nav-link" href="/user-written-history/">Written</a></li>
               </ul>
             </li>
             
@@ -202,60 +202,18 @@
           </ul>
         </aside>
       </div>
-      <!-- Main Content -->
-      <div class="main-content">
-        <section class="section">
-          <div class="section-body">
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h4>MCQ History </h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
-                        <thead>
-                          <tr>
-                            <th>Question</th>
-                            <th>Class</th>
-                            <th>Subject</th>
-                            <th>Chapter</th>
-                            <th>Answared</th>
-                            
-                            <th>Time takes</th>
-							<th>Wrong/Right</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>What is Database ?</td>
-                            <td>JSC</td>
-                            <td>ICT</td>
-                            <td>Database</td>
-                            <td>Store</td>
-                            <td>5sec</td>
-							<td style="color:green">Right</td>
-                          </tr>
-                          <tr>
-                            <td>What is Data ?</td>
-                            <td>JSC</td>
-                            <td>ICT</td>
-                            <td>Database</td>
-                            <td>Info</td>
-                            <td>2sec</td>
-							<td style="color:Red">Wrong</td>
-                          </tr>
-                          
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+
+
+
+      
+        {% block content %}
+
+        {% endblock %}
+
+
+
+
+         
         <div class="settingSidebar">
           <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
           </a>
@@ -350,7 +308,7 @@
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          <a href="templateshub.net">PreTest</a></a>
+          <a href="/">PrepZone</a></a>
         </div>
         <div class="footer-right">
         </div>
@@ -358,24 +316,34 @@
     </div>
   </div>
   <!-- General JS Scripts -->
-  <script src="assets/js/app.min.js"></script>
+  <script src="{% static 'blogapp/user_panel/assets/js/app.min.js' %}"></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'blogapp/user_panel/assets/bundles/apexcharts/apexcharts.min.js' %}"></script>
+  <!-- Page Specific JS File -->
+  <script src="{% static 'blogapp/user_panel/assets/js/page/index.js' %}"></script>
+  <!-- Template JS File -->
+  <script src="{% static 'blogapp/user_panel/assets/js/scripts.js' %}"></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'blogapp/user_panel/assets/js/custom.js' %}"></script>
+    <script src="assets/js/app.min.js"></script>
   <!-- JS Libraies -->
   <!-- Page Specific JS File -->
-  <script src="assets/bundles/datatables/datatables.min.js"></script>
-  <script src="assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
-  <script src="assets/bundles/datatables/export-tables/dataTables.buttons.min.js"></script>
-  <script src="assets/bundles/datatables/export-tables/buttons.flash.min.js"></script>
-  <script src="assets/bundles/datatables/export-tables/jszip.min.js"></script>
-  <script src="assets/bundles/datatables/export-tables/pdfmake.min.js"></script>
-  <script src="assets/bundles/datatables/export-tables/vfs_fonts.js"></script>
-  <script src="assets/bundles/datatables/export-tables/buttons.print.min.js"></script>
-  <script src="assets/js/page/datatables.js"></script>
-  <!-- Template JS File -->
-  <script src="assets/js/scripts.js"></script>
-  <!-- Custom JS File -->
-  <script src="assets/js/custom.js"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/datatables.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/dataTables.buttons.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/buttons.flash.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/jszip.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/pdfmake.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/vfs_fonts.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/bundles/datatables/export-tables/buttons.print.min.js' %}"></script>
+  <script src="{% static 'blogapp/user_panelassets/js/page/datatables.js' %}"></script>
+
+  
+  <script src="{% static 'blogapp/user_panelassets/assets/bundles/jquery-ui/jquery-ui.min.js' %}"></script>
+
+
 </body>
 
 
-<!-- export-table.html  21 Nov 2019 03:56:01 GMT -->
+<!-- index.html  21 Nov 2019 03:47:04 GMT -->
 </html>

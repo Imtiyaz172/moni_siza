@@ -147,3 +147,6 @@ class contactModel(admin.ModelAdmin):
     list_per_page   = 30
     
 admin.site.register(models.contact, contactModel)
+admin.site.register(models.visitor)
+admin.site.register(models.board_on_year)
+admin.site.register(models.index_speech)

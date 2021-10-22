@@ -26,6 +26,20 @@ class about_us(models.Model):
         verbose_name_plural = 'about_us' 
 
 
+class index_speech(models.Model):
+    title       = models.CharField(max_length=50)
+    image        = models.ImageField(upload_to="logo/",blank= True)
+    
+    speech    = models.TextField(blank=True)
+    status      = models.BooleanField(default = True)
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'index speech'
+        verbose_name_plural = 'index speech' 
+
+
 
 
 class contact(models.Model):
@@ -33,7 +47,7 @@ class contact(models.Model):
     email          = models.CharField(max_length=100,blank= True)
     massage          = models.TextField(blank= True)
     time          = models.DateTimeField(auto_now_add = True)
-    status        = models.BooleanField(default = True)
+    view_in_home        = models.BooleanField(default = False)
 
     def __str__(self):
         return self.name     
@@ -215,9 +229,10 @@ class user_answer(models.Model):
 class user_written_answer(models.Model):
     user_reg      = models.ForeignKey(user_reg, on_delete=models.CASCADE)
     question      = models.ForeignKey(written, on_delete=models.CASCADE)
-    ans             = models.FileField(upload_to="ans/",blank= True)  
+    ans             = models.FileField(upload_to="ans/",blank= True) 
+    mark          = models.FloatField(default = 0,blank= True)
     time          = models.DateTimeField(auto_now_add = True)
-    status        = models.BooleanField(default = True)
+    status        = models.BooleanField(default = False)
 
     def __str__(self):
         return str(self.user_reg)     
@@ -250,6 +265,16 @@ class year(models.Model):
         verbose_name = 'year'
         verbose_name_plural = 'year' 
 
+class visitor(models.Model):
+    count          = models.IntegerField(default=0,blank= True)
+    status        = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.count     
+    class Meta:
+        verbose_name = 'Visitor'
+        verbose_name_plural = 'Visitor' 
+
 class board(models.Model):
     name          = models.CharField(max_length=55,blank= True)
     status        = models.BooleanField(default = True)
@@ -261,13 +286,26 @@ class board(models.Model):
         verbose_name_plural = 'board' 
 
 
+class board_on_year(models.Model):
+    name          = models.CharField(max_length=100,blank= True,null=True)
+    year          = models.ForeignKey(year, on_delete=models.CASCADE)
+    board         = models.ForeignKey(board, on_delete=models.CASCADE)
+    status        = models.BooleanField(default = True)
+
+    def __str__(self):
+        return self.name     
+    class Meta:
+        verbose_name = 'board_on_year'
+        verbose_name_plural = 'board_on_year' 
+
+ 
 
 
 
 class prev_year_ques(models.Model):
     name          = models.CharField(max_length=100,blank= True)
-    year          = models.ForeignKey(year, on_delete=models.CASCADE)
-    board         = models.ForeignKey(board, on_delete=models.CASCADE)
+    year_and_board          = models.ForeignKey(board_on_year, on_delete=models.CASCADE,blank= True,null=True)
+    subject         = models.ForeignKey(subject, on_delete=models.CASCADE,blank= True,null=True)
     question      = models.FileField(upload_to="prev_year_ques/",blank= True)
     status        = models.BooleanField(default = True)
 

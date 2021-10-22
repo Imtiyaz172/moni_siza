@@ -20,7 +20,7 @@
                 {% for chapter in subjects_chapter %}
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                         <div class="mini-box">
-                            <i><img src="assets/images/work-process-item-01.png" alt=""></i>							
+                            <i><img src="{% static 'blogapp/assets/images/work-process-item-01.png' %}" alt=""></i>							
                             <strong>{{chapter.chapter}}</strong>
                             <a href="/Practices/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}/">Practices</a><br>
                             <a href="/list/{{ chapter.classsubject.classes|str2url }}/{{chapter.classsubject.subject|str2url}}/{{chapter.chapter|str2url}}">MCQ</a><br>
