@@ -172,18 +172,29 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 user_ans = models.user_answer.objects.create(
                     user_reg_id = int(request.session['id']), question_id = questions.id,text_choose = direct_input_op, taketime=taketime,
                 )
-                
-                
-                if cheak_ans:
-                
-                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
-                    messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে")
-                    valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
+                models.user_hit_count.objects.create(user_reg_id = int(request.session['id']))
+                valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
 
-                    valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
-                    return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
+                valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
+                models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
+                models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).update(hit_count = F('hit_count')+1)
+                cheak_hit  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).first()
+                cheak_hit1 = cheak_hit.hit_count
+                if cheak_ans:
+                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True )
+                    if cheak_hit1 % 10 == 0:
+                        return redirect("/result")
+                    else:
+                        return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
                 elif not cheak_ans:
-                    messages.warning(request, "আপনার উত্তরটি ভুল হয়েছে")
+                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = False )
+                    if cheak_hit1 % 10 == 0:
+                        return redirect("/result")
+                    else:
+                        return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
+
+                # get_star  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id ) 
+                    
                 
             else:
                 if cheak_ans:
@@ -210,40 +221,35 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 user_ans = models.user_answer.objects.create(
                     user_reg_id = int(request.session['id']), question_id =questions.id,ans_choose_op_1 = ans_op_1, ans_choose_op_2 = ans_op_2, ans_choose_op_3 = ans_op_3, ans_choose_op_4 = ans_op_4, taketime=taketime,
                 )
+                
+
+                models.user_hit_count.objects.create(user_reg_id = int(request.session['id']))
+  
+                models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
+                models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).update(hit_count = F('hit_count')+1)
+                cheak_hit  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).first()
+                cheak_hit1 = cheak_hit.hit_count
+
+
                 valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
 
                 valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
-                # cheak_hit = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id)
-                # if cheak_hit:
-                #     models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(hit_count = F('hit_count')+1)
-                # else:
-                #     hit_count = models.user_hit_count.objects.create(
-                #     user_reg_id = int(request.session['id']), question_id = questions.id ,hit_count = 1
-                #     )
-
-                # cheak_star_5  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 1, star = 0)
-                # cheak_star_4  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 2, star = 0)
-                # cheak_star_3  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 3, star = 0)
-                # cheak_star_2  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id, hit_count = 4, star = 0)
-                # cheak_star_1  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id,  star = 0)
+            
                 if cheak_ans:
-                #     if cheak_star_5:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+5)
-                #     elif cheak_star_4:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+4)
-                #     elif cheak_star_3:
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+3)
-                #     elif cheak_star_2 :
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+2)
-                #     elif cheak_star_1 :
-                #         models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id).update(star = F('star')+1)
                     models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True )
-                    messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে.")
-                    return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
-                   
+                    if cheak_hit1 % 10 == 0:
+                        return redirect("/result")
+                    else:
+                        return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
+                
 
                 elif not cheak_ans:
-                    messages.warning(request, "আপনার উত্তরটি ভুল হয়েছে")
+                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = False )
+                    if cheak_hit1 % 10 == 0:
+                        return redirect("/result")
+                    else:
+                        return redirect("/list"+"/"+classes_name.replace(' ', '-')+"/"+sub_name.replace(' ', '-')+"/"+chapter_name.replace(' ', '-')+"/"+type_name.replace(' ', '-')+"/"+str(valid_profiles_list[0]))
+
                 # get_star  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id']), question_id = questions.id )       
             else:   
                 if cheak_ans:
@@ -351,20 +357,7 @@ def user_reg(request):
 
 
 
-def login(request):
-    if request.method=="POST":
-        email     = request.POST['email']
-        password  = request.POST['password']
 
-        new_md5_obj = hashlib.md5(password.encode())
-        enc_pass    = new_md5_obj.hexdigest()
-        user        = models.user_reg.objects.filter(email = email, password = enc_pass)
-        if user:
-            request.session['email'] = user[0].email
-            request.session['id'] = user[0].id
-            return redirect("/")
-    
-    return render(request, "blogapp/admin/login.html")
 
 def logout(request):
     request.session['email'] = False
@@ -439,200 +432,62 @@ def prv_year_ques(request, year_name,board,subject):
 # .................................... For Admin..................................................
 
 def dashboard (request):
-    if not request.session['id']:
+    if request.session["id"]:
+        user_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
+        mcq_count      = models.user_answer.objects.filter(user_reg_id = request.session['id']).count()
+        written_count      = models.user_written_answer.objects.filter(user_reg_id = request.session['id']).count()
+        context={
+            'user_profile'    : user_profile,
+            'mcq_count'    : mcq_count,
+            'written_count'    : written_count,
+    }
+    else:
         return redirect('/')
-    user_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
-    mcq_count      = models.user_answer.objects.filter(user_reg_id = request.session['id']).count()
-    written_count      = models.user_written_answer.objects.filter(user_reg_id = request.session['id']).count()
-    context={
-        'user_profile'    : user_profile,
-        'mcq_count'    : mcq_count,
-        'written_count'    : written_count,
-}
     return render(request, "blogapp/user_panel/index.html",context)
 
 def history (request):
-    if not request.session['id']:
-        return redirect('/login/')
+    if request.session["id"]:
+        
+        user_history      = models.user_answer.objects.filter(status = True, user_reg_id = request.session['id']).order_by("id")
+        
+        
+            
+        context={
+            'user_history'    : user_history,
+    }
+    else:
+        return redirect('/')
+    return render(request, "blogapp/user_panel/user_history.html",context)
+
+def resultshow(request):
+        
     user_history      = models.user_answer.objects.filter(status = True, user_reg_id = request.session['id']).order_by("-id")
     
     
         
     context={
         'user_history'    : user_history,
-}
-    return render(request, "blogapp/user_panel/user_history.html",context)
+    }
+    return render(request, "blogapp/resultshow.html",context)
 
 def written_history (request):
-    if not request.session['id']:
-        return redirect('/login/')
-    user_history      = models.user_written_answer.objects.filter( user_reg_id = request.session['id']).order_by("-id")
+    if request.session["id"]:
+        user_history      = models.user_written_answer.objects.filter( user_reg_id = request.session['id']).order_by("-id")
     
     
         
-    context={
+        context={
         'user_history'    : user_history,
 }
+    else:
+        return redirect('/')
     return render(request, "blogapp/user_panel/history.html",context)
-
-
-def subjectresult(request):
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    classes    = models.classsubject.objects.filter(status=True).all()
-    
-    context={
-        'classes'    : classes,
-}
-    return render(request, "blogapp/admin/classlist.html",context)
-
-def classlistimprove(request):
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    classes    = models.classsubject.objects.filter(status=True).all()
-    
-    context={
-        'classes'    : classes,
-}
-    return render(request, "blogapp/admin/classlist_improvement.html",context)
-
-
-def subjectlist(request, class_name):
-    class_name        = class_name.replace('-', ' ')
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    
-    subjectsre   = models.classsubject.objects.filter(classes_id__name=class_name,status=True).order_by("id")
-        
-
-    context={
-        'subjectsre'    : subjectsre,
-    }
-    return render(request, "blogapp/admin/subject_res.html",context)
-        
-def subjectlistimprovement(request, class_name):
-    class_name        = class_name.replace('-', ' ')
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    
-    subjectsre   = models.classsubject.objects.filter(classes_id__name=class_name,status=True).order_by("id")
-        
-
-    context={
-        'subjectsre'    : subjectsre,
-    }
-    return render(request, "blogapp/admin/subject_imp.html",context)
-
-
-def chapter_list_improvement(request, class_name,sub_name):
-    class_name        = class_name.replace('-', ' ')
-    sub_name            = sub_name.replace('-', ' ')
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    chapter_list   = models.subjectchapter.objects.filter(classsubject_id__classes_id__name=class_name, classsubject_id__subject_id__name=sub_name,status=True).order_by("id")
-
-    
-    context={
-        'chapter_list'    : chapter_list,
-        
-    }
-    return render(request, "blogapp/admin/chapter_imp.html",context)
-
-
-def improvement(request, class_name,sub_name,chapter_name):
-    class_name        = class_name.replace('-', ' ')
-    sub_name            = sub_name.replace('-', ' ')
-    chapter_name        = chapter_name.replace('-', ' ')
-    if not request.session['id']:
-        return redirect('/login/')
-    
-    all_ques_c     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,user_reg_id = request.session['id']).count()
-    secound     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,is_correct_ans='True',user_reg_id = request.session['id'])[:50].count()
-    all_ans     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,is_correct_ans='True',user_reg_id = request.session['id']).count()
-    all_ques50     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,user_reg_id = request.session['id'])[:50]
-    all_ques25     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,user_reg_id = request.session['id'])[:25]
-    all_ques     =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,question_id__subjectchapter_id__chapter_id__name=chapter_name ,user_reg_id = request.session['id'])
-    # all_ques = int(all_ques)
-    correct_count = 0
-    correct_count25 = 0
-    correct_count50 = 0
-    for i in all_ques:
-        if i.is_correct_ans: correct_count += 1
-        print(i.is_correct_ans,i.id)
-    for i in all_ques25:
-        if i.is_correct_ans: correct_count25 += 1
-        print(i.is_correct_ans,i.id)
-    for i in all_ques50:
-        if i.is_correct_ans: correct_count50 += 1
-        print(i.is_correct_ans,i.id)
-
-    # all_ques = all_ques.filter(is_correct_ans=True)
-
-    # if all_ques < 25:
-    #     first_persent = first / all_ques * 100
-     
-    # if all_ques > 25:
-    #     first_persent = first / 25 * 100
-    #     print(first_persent)
-
-    # if all_ques < 50:
-    #     secound_persent = secound / all_ques * 100
-    #     print(secound_persent)
-        
-    # if all_ques > 50:
-    #     all_ans_persent = all_ans / all_ques * 100
-   
-    context={
-    
-    # 'all_ans_persent'    : all_ans_persent,
-    'correct_count'    : correct_count,
-    'correct_count25'    : correct_count25,
-    'correct_count50'    : correct_count50,
-    'all_ques_c'    : all_ques_c,
-    # 'first_persent'    : first_persent,
-    # 'secound_persent'    : secound_persent,
-    
-}
-    
-    
-    return render(request, "blogapp/admin/improvment.html",context)
-
-
-
-def subjectperform(request, class_name,sub_name):
-    class_name        = class_name.replace('-', ' ')
-    sub_name            = sub_name.replace('-', ' ')
-    
-    if not request.session['id']:
-        return redirect('/login/')
-    
-
-    answerd    =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,user_reg_id = request.session['id']).count()
-    right      =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name, is_correct_ans='True' ,user_reg_id = request.session['id']).count()
-    wrong      =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name, is_correct_ans='False' ,user_reg_id = request.session['id']).count()
-    spend      =  models.user_answer.objects.filter(question_id__subjectchapter_id__classsubject_id__subject_id__name=sub_name ,question_id__subjectchapter_id__classsubject_id__classes_id__name=class_name ,user_reg_id = request.session['id']).aggregate(Sum('taketime'))['taketime__sum'],
-    spend = float('.'.join(str(ele) for ele in spend))
-    context={
-        'answerd'    : answerd,
-        'right'    : right,
-        'wrong'    : wrong,
-        'spend'    : spend,
-    }
-    return render(request, "blogapp/admin/result.html",context)
-
-   
-
 
 
 
 
 def edit_profile (request):
-    if not request.session['id']:
+    if not request.session == None:
         return redirect('/login/')
     edit_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
     context={

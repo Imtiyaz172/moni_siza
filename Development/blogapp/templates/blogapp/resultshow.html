@@ -1,0 +1,93 @@
+{% extends 'blogapp/base.html' %}
+{% load staticfiles %}
+{% load data_load %}
+
+{% block content %}	
+
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Blog End ***** -->
+
+    <!-- ***** Contact Us Start ***** -->
+ 	<div style="padding:170px 0px 100px">
+
+
+	<div class="course">
+		<div class="course_top"></div>
+		<div class="course_bottom">
+		<div class="container">
+			<div class="row row-lg-eq-height">
+
+				<!-- Panels -->
+				<div class="col-lg-12">
+					
+					
+
+						<table class="table table-striped" id="table-1">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Question</th>                            
+                            <th>Answared</th>
+							              <th>Wrong/Right</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           {% for table in user_history|slice:"10" %}
+                              <tr>
+                                   <td>{{ forloop.revcounter}}</td>
+                                    <td>{{table.question}}</td>
+                                    {% if table.text_choose %}
+                                        <td>{{table.text_choose}}</td>
+                                    {% else %}
+                                        <td>
+                                        {% if table.ans_choose_op_1 %}
+                                            {{table.question.text_op_1}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_2 %}
+                                                {{table.question.text_op_2}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_3 %}
+                                                {{table.question.text_op_3}}
+                                        {% endif %}
+                                        {% if table.ans_choose_op_4 %}
+                                            {{table.question.text_op_4}}
+                                        {% endif %}
+                                        </td>
+                                        {% endif %}
+                                  {% if table.is_correct_ans is True %}
+                                        <td class="datatable-ct" ><i class="fa fa-check"style="color:green"></i>
+                                        </td>
+                                    {% else %}
+                                        <td class="datatable-ct"><i class="fa fa-times"style="color:red"></i>
+                                        </td>
+                                    {% endif %}
+                                    
+                              </tr>
+                            {% endfor %}
+                        </tbody>
+                      </table>
+						
+						<br><br>
+						
+						<br><br>
+						
+				<center>	<a style="color:white" class="btn btn-primary" href="/" type="button" >Go to home</a></center>
+					
+				</div>
+								
+				</div>
+					
+				</div>
+				
+
+					</div>				
+				</div>
+				
+				
+
+			</div>
+		</div>
+		</div>
+	</div>
+{% endblock %}

@@ -243,7 +243,6 @@ class user_written_answer(models.Model):
 
 class user_hit_count(models.Model):
     user_reg      = models.ForeignKey(user_reg, on_delete=models.CASCADE)
-    question      = models.ForeignKey(question, on_delete=models.CASCADE)
     hit_count      = models.IntegerField(default=0)
     star          = models.IntegerField(default=0)
     status        = models.BooleanField(default = True)

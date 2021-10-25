@@ -132,7 +132,7 @@ class user_written_answerModel(admin.ModelAdmin):
 admin.site.register(models.user_written_answer, user_written_answerModel)
 
 class user_hit_countModel(admin.ModelAdmin):
-    list_display    = ["user_reg","question","hit_count","star"]
+    list_display    = ["user_reg","hit_count","star"]
     search_fields   = ["question"]
     list_per_page   = 50
     list_filter     = ["star"]
