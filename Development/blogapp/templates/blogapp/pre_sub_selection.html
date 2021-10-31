@@ -9,23 +9,26 @@
 	<div class="teachers">
 	
 		<div class="container">
-		<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Board
-							<span class="caret"></span></button>
-							<ul class="dropdown-menu">
-							
-							{% for board in question %}
-								<center><li><a href="/prv-ques/{{board.year|str2url}}/{{board.board|str2url}}">{{board.board}}</a></li>
-							{% endfor %}
-							  
-							  
-							</ul>
-						  </div>
+		
 			<div class="row">
 				<div class="col">
-					<h2 class="section_title text-center">Choose Board First</h2>
+					<h2 class="section_title text-center">Choose your Subject</h2>
 				</div>
 			</div>
+			<div class="row teachers_row">
+
+				<!-- Instructor -->
+				{% for subject in subject %}
+					<div class="col-lg-4 col-md-6">
+					<div class="teacher d-flex flex-row align-items-center justify-content-start">
+						<div class="teacher_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
+						<div class="teacher_content">
+							<div class="teacher_name"><a href="/prv-ques/{{subject.year_and_board.classes_on_year.classes.name|str2url}}/{{subject.year_and_board.classes_on_year.years|str2url}}/{{subject.year_and_board.board|str2url}}/{{subject.subject|str2url}}/">{{subject.subject}}</a></div>
+							<!-- <div class="teacher_title">Teacher</div> -->
+						</div>
+					</div>
+				</div>
+				{% endfor %}
 			
 		</div>
 	</div>

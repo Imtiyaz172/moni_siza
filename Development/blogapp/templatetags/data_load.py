@@ -32,7 +32,7 @@ def users(request):
 
 @register.filter(name='year_reg')
 def year(request):
-    year  = models.year.objects.filter(status = True).order_by("-id")
+    year  = models.classes_on_year.objects.filter(status = True).order_by("-id")
     return year
 
 

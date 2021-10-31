@@ -60,8 +60,8 @@
                     <div class="row ">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
-                          <h5 class="font-15">Grade</h5>
-                          <h2 class="mb-3 font-18">A+</h2>
+                          <h5 class="font-15">MCQ Accuracy</h5>
+                          <h2 class="mb-3 font-18">{{accuracy}}%</h2>
                           
                         </div>
                       </div>
@@ -82,8 +82,22 @@
                     <div class="row ">
                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
                         <div class="card-content">
-                          <h5 class="font-15">Stutas</h5>
-                          <h2 class="mb-3 font-18">Good</h2>
+                          <h5 class="font-15">Grade </h5>
+                          {% if accuracy > 80 %}
+                            <h2 class="mb-3 font-18">A+</h2>
+                          {% elif accuracy > 70 %}
+                            <h2 class="mb-3 font-18">A</h2>
+                            {% elif accuracy > 60 %}
+                            <h2 class="mb-3 font-18">B+</h2>
+                            {% elif accuracy > 50 %}
+                            <h2 class="mb-3 font-18">B</h2>
+                            {% elif accuracy > 40 %}
+                            <h2 class="mb-3 font-18">C</h2>
+                            {% elif accuracy < 33 %}
+                            <h2 class="mb-3 font-18">F</h2>
+                            
+                          {% endif %}
+                          
                           
                         </div>
                       </div>

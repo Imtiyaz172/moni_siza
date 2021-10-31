@@ -436,8 +436,9 @@ https://templatemo.com/tm-535-softy-pinko
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Previous Year Questions
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-              {% for year in year|year_reg %}
-                <li><a href="/prv-ques/{{year.year}}/">{{year.year}}</a></li>
+              {% regroup year|year_reg by classes as classes_list %}
+              {% for years in classes_list %}
+                <li><a href="/prv-ques/{{years.grouper|str2url}}/2021/">{{years.grouper}}</a></li>
               {% endfor %}
 							  
 							 

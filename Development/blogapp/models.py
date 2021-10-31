@@ -218,6 +218,7 @@ class user_answer(models.Model):
     is_correct_ans  = models.BooleanField(default = False)
     time          = models.DateTimeField(auto_now_add = True)
     taketime   = models.CharField(max_length=50,blank= True)
+    mark          = models.IntegerField(default=0)
     status        = models.BooleanField(default = True)
 
     def __str__(self):
@@ -240,6 +241,18 @@ class user_written_answer(models.Model):
         verbose_name = 'User written answer'
         verbose_name_plural = 'User written answers' 
 
+class user_mark_count(models.Model):
+    user_reg      = models.ForeignKey(user_reg, on_delete=models.CASCADE)
+    subjectchapter  = models.ForeignKey(subjectchapter, on_delete=models.CASCADE)
+    mark          = models.IntegerField(default=0)
+    status        = models.BooleanField(default = False)
+
+    def __str__(self):
+        return str(self.user_reg)     
+    class Meta:
+        verbose_name = 'user_mark_count'
+        verbose_name_plural = 'user_mark_count' 
+
 
 class user_hit_count(models.Model):
     user_reg      = models.ForeignKey(user_reg, on_delete=models.CASCADE)
@@ -253,17 +266,6 @@ class user_hit_count(models.Model):
         verbose_name = 'user_hit_count'
         verbose_name_plural = 'user_hit_counts' 
 
-
-class year(models.Model):
-    year          = models.CharField(max_length=5,blank= True)
-    status        = models.BooleanField(default = True)
-
-    def __str__(self):
-        return self.year     
-    class Meta:
-        verbose_name = 'year'
-        verbose_name_plural = 'year' 
-
 class visitor(models.Model):
     count          = models.IntegerField(default=0,blank= True)
     status        = models.BooleanField(default = True)
@@ -274,21 +276,24 @@ class visitor(models.Model):
         verbose_name = 'Visitor'
         verbose_name_plural = 'Visitor' 
 
-class board(models.Model):
-    name          = models.CharField(max_length=55,blank= True)
+
+
+class classes_on_year(models.Model):
+    classes       = models.ForeignKey(classes, on_delete=models.CASCADE,null=True)
+    years          = models.CharField(max_length=5,blank= True,null=True)
     status        = models.BooleanField(default = True)
 
     def __str__(self):
-        return self.name     
+        return self.years     
     class Meta:
-        verbose_name = 'board'
-        verbose_name_plural = 'board' 
+        verbose_name = 'classes_on_year'
+        verbose_name_plural = 'classes_on_year' 
 
 
 class board_on_year(models.Model):
     name          = models.CharField(max_length=100,blank= True,null=True)
-    year          = models.ForeignKey(year, on_delete=models.CASCADE)
-    board         = models.ForeignKey(board, on_delete=models.CASCADE)
+    classes_on_year          = models.ForeignKey(classes_on_year, on_delete=models.CASCADE,null=True)
+    board         = models.CharField(max_length=55,blank= True,null=True)
     status        = models.BooleanField(default = True)
 
     def __str__(self):

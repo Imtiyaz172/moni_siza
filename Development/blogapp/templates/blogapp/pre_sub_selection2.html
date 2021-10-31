@@ -10,19 +10,19 @@
 	
 		<div class="container">
 		<div class="dropdown">
-							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Board
+							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Year
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-							{% for board in question2 %}
-								<center><li><a href="/prv-ques/{{board.year|str2url}}/{{board.board|str2url}}">{{board.board}}</a></li>
+							{% regroup board by year as year_list %}
+							{% for board.list in year_list %}
+								<center><li><a href="/prv-ques/{{board.0.classes_on_year.classes|str2url}}/{{board.0.classes_on_year|str2url}}/">{{board.0.classes_on_year}}</a></li>
 							{% endfor %}
-							  
 							  
 							</ul>
 						  </div>
 			<div class="row">
 				<div class="col">
-					<h2 class="section_title text-center">Choose your subject</h2>
+					<h2 class="section_title text-center">Choose your Board</h2>
 				</div>
 			</div>
 			<div class="row teachers_row">
@@ -33,7 +33,7 @@
 					<div class="teacher d-flex flex-row align-items-center justify-content-start">
 						<div class="teacher_image"><div><img src="images/instructor_4.jpg" alt=""></div></div>
 						<div class="teacher_content">
-							<div class="teacher_name"><a href="/prv-ques/{{subject.year_and_board.year|str2url}}/{{subject.year_and_board.board|str2url}}/{{subject.subject|str2url}}">{{subject.subject}}</a></div>
+							<div class="teacher_name"><a href="/prv-ques/{{subject.classes_on_year.classes.name|str2url}}/{{subject.classes_on_year.years|str2url}}/{{subject.board|str2url}}">{{subject.board}}</a></div>
 							<!-- <div class="teacher_title">Teacher</div> -->
 						</div>
 					</div>

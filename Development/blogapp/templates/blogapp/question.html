@@ -150,7 +150,12 @@
 					<ul class="laps"></ul>
 					
 					
-				</div>				
+				</div>	
+				{% for mark2 in high_mark|slice:"1" %}		
+					<h6>Highest mark in this chapter <p style="font-size:40px; color:green" >{{mark2.mark}}</p></h6>	
+				{% endfor %}
+				<h6>Your mark in this chapter <p style="font-size:40px; color:red" >{{mark2}}</p></h6>	
+						
 				</div>
 					
 				</div>

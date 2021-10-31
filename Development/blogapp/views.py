@@ -162,6 +162,9 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
     chapter_name        = chapter_name.replace('-', ' ')
     type_name           = type_name.replace('-', ' ')
     questions           = models.question.objects.filter(subjectchapter_id__classsubject_id__classes_id__name=classes_name, subjectchapter_id__classsubject_id__subject_id__name=sub_name, subjectchapter_id__chapter_id__name=chapter_name,ques_level=type_name,id=id ,status=True).first()
+    mark                = models.user_mark_count.objects.filter(user_reg_id = int(request.session['id']),subjectchapter_id = questions.subjectchapter_id).first()
+    high_mark                = models.user_mark_count.objects.filter(subjectchapter_id = questions.subjectchapter_id).order_by("-mark")
+    mark2 = mark.mark            
     if request.method=="POST":
         direct_input_op   = request.POST.get('direct_input_op')
         taketime        = request.POST.get('taketime')
@@ -174,14 +177,17 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 )
                 models.user_hit_count.objects.create(user_reg_id = int(request.session['id']))
                 valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
-
+                
+                
+                
                 valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
                 models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
                 models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).update(hit_count = F('hit_count')+1)
                 cheak_hit  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).first()
                 cheak_hit1 = cheak_hit.hit_count
                 if cheak_ans:
-                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True )
+                    models.user_mark_count.objects.filter(user_reg_id = int(request.session['id']),subjectchapter_id = questions.subjectchapter_id).update(mark = F('mark')+1)
+                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, mark =F('mark') + 1)
                     if cheak_hit1 % 10 == 0:
                         return redirect("/result")
                     else:
@@ -198,6 +204,7 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 
             else:
                 if cheak_ans:
+                    
                     valid_profiles_id_list      = models.question.objects.values_list('id', flat=True).filter(subjectchapter_id__classsubject_id__classes_id__name = classes_name,subjectchapter_id__classsubject_id__subject_id__name=sub_name,subjectchapter_id__chapter_id__name=chapter_name ,ques_level=type_name,status=True).exclude(id = id)
                     valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
                     messages.success(request, "আপনার উত্তরটি সঠিক হয়েছে.")
@@ -229,6 +236,7 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 models.user_hit_count.objects.create(user_reg_id = int(request.session['id']))
   
                 models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True, )
+                
                 models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).update(hit_count = F('hit_count')+1)
                 cheak_hit  = models.user_hit_count.objects.filter(user_reg_id = int(request.session['id'])).first()
                 cheak_hit1 = cheak_hit.hit_count
@@ -239,7 +247,9 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
                 valid_profiles_list = random.sample(list(valid_profiles_id_list), len(valid_profiles_id_list))    
             
                 if cheak_ans:
-                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True )
+                    models.user_mark_count.objects.filter(user_reg_id = int(request.session['id']),subjectchapter_id = questions.subjectchapter_id).update(mark = F('mark')+1)
+                    
+                    models.user_answer.objects.filter(id = user_ans.id).update(is_correct_ans = True , mark =F('mark') + 1)
                     if cheak_hit1 % 10 == 0:
                         return redirect("/result")
                     else:
@@ -275,6 +285,8 @@ def question(request, classes_name, sub_name, chapter_name,type_name, id):
     
     context={
         'questions'    : questions,
+        'mark2'    : mark2,
+        'high_mark'    : high_mark,
         # 'get_star'    : get_star,
         
 
@@ -382,35 +394,42 @@ def course(request, class_name):
 
 
 
-def prv_ques(request, year_name):
+def prv_ques2(request,class_name, year_name):
+    class_name        = class_name.replace('-', ' ')
     year_name        = year_name.replace('-', ' ')
-    question          = models.board_on_year.objects.filter(year_id__year=year_name,status=True).order_by("id")    
+    
+    board               = models.board_on_year.objects.filter(status=True).all()
+    question          = models.board_on_year.objects.filter(classes_on_year_id__classes_id__name=class_name,classes_on_year_id__years=year_name,status=True).order_by("id")    
     context={
+    
         'question':question,
-    }
-    return render(request, "blogapp/pre_sub_selection.html",context)
-
-
-
-def prv_ques2(request, year_name,board):
-    year_name        = year_name.replace('-', ' ')
-    board            = board.replace('-', ' ')
-    question2          = models.board_on_year.objects.filter(status=True).order_by("id")    
-    question          = models.prev_year_ques.objects.filter(year_and_board_id__year_id__year=year_name,year_and_board_id__board_id__name=board,status=True).order_by("id")    
-    context={
-        'question2':question2,
-        'question':question,
+        'board':board,
+        
     }
     return render(request, "blogapp/pre_sub_selection2.html",context)
 
 
 
 
-def prv_year_ques(request, year_name,board,subject):
+def prv_ques(request, class_name,board_name,year_name):
+    class_name        = class_name.replace('-', ' ')
     year_name        = year_name.replace('-', ' ')
-    board            = board.replace('-', ' ')
-    subject            = subject.replace('-', ' ')  
-    prv_question          = models.prev_year_ques.objects.filter(year_and_board_id__year_id__year=year_name,year_and_board_id__board_id__name=board,subject_id__name=subject,status=True).first()
+    board_name        = board_name.replace('-', ' ')
+    subject               = models.prev_year_ques.objects.filter(year_and_board_id__classes_on_year_id__classes_id__name=class_name,year_and_board_id__classes_on_year_id__years=year_name,year_and_board_id__board=board_name,status=True).all()
+    context={
+        
+        'subject':subject,
+    }
+    return render(request, "blogapp/pre_sub_selection.html",context)
+
+
+
+def prv_year_ques(request,class_name, year_name,board_name,subject_name):
+    class_name        = class_name.replace('-', ' ')
+    year_name        = year_name.replace('-', ' ')
+    board_name        = board_name.replace('-', ' ')
+    subject_name            = subject_name.replace('-', ' ')  
+    prv_question          = models.prev_year_ques.objects.filter(year_and_board_id__classes_on_year_id__classes_id__name=class_name,year_and_board_id__classes_on_year_id__years=year_name,year_and_board_id__board=board_name,subject_id__name=subject_name,status=True).first()
     
     context={
         
@@ -441,11 +460,15 @@ def dashboard (request):
     if request.session["id"]:
         user_profile      = models.user_reg.objects.filter(status = True, id = request.session['id']).first()
         mcq_count      = models.user_answer.objects.filter(user_reg_id = request.session['id']).count()
+        right      = models.user_answer.objects.filter(user_reg_id = request.session['id'],is_correct_ans=True).count()
+        accuracy2 = (right/mcq_count)*100
+        accuracy = int(accuracy2)
         written_count      = models.user_written_answer.objects.filter(user_reg_id = request.session['id']).count()
         context={
             'user_profile'    : user_profile,
             'mcq_count'    : mcq_count,
             'written_count'    : written_count,
+            'accuracy'    : accuracy,
     }
     else:
         return redirect('/')

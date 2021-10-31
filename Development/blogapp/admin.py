@@ -54,21 +54,6 @@ class chapterModel(admin.ModelAdmin):
 admin.site.register(models.chapter, chapterModel)
 
 
-class yearModel(admin.ModelAdmin):
-    list_display    = ["year"]
-    search_fields   = ['year']
-    list_per_page   = 20
-    list_filter     = ["year"]
-
-admin.site.register(models.year, yearModel)
-
-class boardModel(admin.ModelAdmin):
-    list_display    = ["name"]
-    search_fields   = ['name']
-    list_per_page   = 20
-    list_filter     = ["name"]
-
-admin.site.register(models.board, boardModel)
 
 class prev_year_quesModel(admin.ModelAdmin):
     list_display    = ["name"]
@@ -149,4 +134,6 @@ class contactModel(admin.ModelAdmin):
 admin.site.register(models.contact, contactModel)
 admin.site.register(models.visitor)
 admin.site.register(models.board_on_year)
+admin.site.register(models.classes_on_year)
 admin.site.register(models.index_speech)
+admin.site.register(models.user_mark_count)
