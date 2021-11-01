@@ -71,9 +71,9 @@
 						<br><br>
 						
 						<br><br>
-						
-				<center>	<a style="color:white" class="btn btn-primary" href="/" type="button" >Go to home</a></center>
-					
+						{% for table in user_history|slice:"1" %}
+				        <center>	<a style="color:white" class="btn btn-primary" href="/list/{{table.question.subjectchapter.classsubject.classes.name|str2url}}/{{table.question.subjectchapter.classsubject.subject.name|str2url}}/{{table.question.subjectchapter.chapter.name|str2url}}/{{table.question.ques_level|str2url}}/{{table.question.id|str2url}}/" type="button" >Test Again</a></center>
+					{% endfor %}
 				</div>
 								
 				</div>

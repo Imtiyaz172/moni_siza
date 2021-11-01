@@ -13,9 +13,9 @@
 							<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Year
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
-							{% regroup board by year as year_list %}
-							{% for board.list in year_list %}
-								<center><li><a href="/prv-ques/{{board.0.classes_on_year.classes|str2url}}/{{board.0.classes_on_year|str2url}}/">{{board.0.classes_on_year}}</a></li>
+							{% regroup board by years as years_list %}
+							{% for board in years_list %}
+								<center><li><a href="/prv-ques/{{board.list.0.classes|str2url}}/{{board.list.0.years|str2url}}/">{{board.grouper}}</a></li>
 							{% endfor %}
 							  
 							</ul>
